@@ -2,16 +2,12 @@
 
 public static class ArkInitializer
 {
-    public static bool CheckConfig()
+    public static void CheckConfig()
     {
-        var configOK = false;
-
         var config = new Pulumi.Config();
 
         var location = config.Require("location");
         Console.WriteLine($"The location was:{location}");
-
-        return configOK;
     }
 
     public static Dictionary<string, object?> Start()
