@@ -1,4 +1,9 @@
-﻿namespace ArkInit.Azure;
+﻿using Resources = Pulumi.AzureNative.Resources;
+using Storage = Pulumi.AzureNative.Storage;
+
+using Pulumi.AzureNative.Storage.Inputs;
+
+namespace ArkInit.Azure;
 
 public static class ArkInitializer
 {
@@ -10,9 +15,36 @@ public static class ArkInitializer
         Console.WriteLine($"The location was:{location}");
     }
 
+    public static Tuple<Resources.ResourceGroup, Storage.StorageAccount> CreateStorage(string groupName, string  stAccountName)
+    {
+        var resourceGroup = new Resources.ResourceGroup(groupName);
+        var storageAccount = new Storage.StorageAccount("sa", new()
+        {
+            ResourceGroupName = resourceGroup.Name,
+            Sku = new SkuArgs
+            {
+                Name = Storage.SkuName.Standard_LRS
+            },
+            Kind = Storage.Kind.StorageV2
+        });
+
+        return Tuple.Create(resourceGroup, storageAccount);
+    }
     public static Dictionary<string, object?> Start()
     {
+        // Init exports variable
         var exports = new Dictionary<string, object?>();
+
+        // Create RG & Storage Account for Pulumi State
+        var (rg, st) = CreateStorage(groupName: "rg-pulumi-", stAccountName: "st-pulumistate-");
+        exports.Add("pulumi-resourcegroup",rg);
+        exports.Add("pulumi-storage", st);
+
+        // Create RG & Storage Account for Pulumi State
+        var (rg1, st1) = CreateStorage(groupName: "rg-ark-", stAccountName: "st-arklogs-");
+        exports.Add("ark-resourcegroup", rg);
+        exports.Add("ark-storage", st);
+
 
         // Check Config before start
         CheckConfig();
