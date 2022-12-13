@@ -32,6 +32,9 @@ public static class ArkInitializer
     }
     public static Dictionary<string, object?> Start()
     {
+        // Check Config before start
+        CheckConfig();
+
         // Init exports variable
         var exports = new Dictionary<string, object?>();
 
@@ -45,9 +48,6 @@ public static class ArkInitializer
         exports.Add("ark-resourcegroup", rg);
         exports.Add("ark-storage", st);
 
-
-        // Check Config before start
-        CheckConfig();
 
         return exports;
     }
