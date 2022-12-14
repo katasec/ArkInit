@@ -11,8 +11,8 @@ public static class ArkInitializer
     {
         var config = new Pulumi.Config();
 
-        var location = config.Require("azure-native:location");
-        Console.WriteLine($"The location was:{location}");
+        //var location = config.Require("azure-native:location");
+        //Console.WriteLine($"The location was:{location}");
     }
 
     public static Tuple<Resources.ResourceGroup, Storage.StorageAccount> CreateStorage(string groupName, string  stAccountName)
