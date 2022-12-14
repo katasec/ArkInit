@@ -39,12 +39,12 @@ public static class ArkInitializer
         var exports = new Dictionary<string, object?>();
 
         // Create RG & Storage Account for Pulumi State
-        var (rg, st) = CreateStorage(groupName: "rg-pulumi-", stAccountName: "st-pulumistate-");
+        var (rg, st) = CreateStorage(groupName: "rg-pulumi-", stAccountName: "stpulumistate");
         exports.Add("pulumi-resourcegroup",rg);
         exports.Add("pulumi-storage", st);
 
         // Create RG & Storage Account for Pulumi State
-        var (rg1, st1) = CreateStorage(groupName: "rg-ark-", stAccountName: "st-arklogs-");
+        var (rg1, st1) = CreateStorage(groupName: "rg-ark-", stAccountName: "starklogs");
 
         exports.Add("ark-resourcegroup", rg);
         exports.Add("ark-storage", st);
