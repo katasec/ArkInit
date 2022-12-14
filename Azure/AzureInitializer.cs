@@ -45,6 +45,7 @@ public static class ArkInitializer
 
         // Create RG & Storage Account for Pulumi State
         var (rg1, st1) = CreateStorage(groupName: "rg-ark-", stAccountName: "st-arklogs-");
+
         exports.Add("ark-resourcegroup", rg);
         exports.Add("ark-storage", st);
 
