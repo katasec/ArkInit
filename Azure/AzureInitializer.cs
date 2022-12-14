@@ -11,7 +11,7 @@ public static class ArkInitializer
     {
         var config = new Pulumi.Config();
 
-        var location = config.Require("location");
+        var location = config.Require("azure-native:location");
         Console.WriteLine($"The location was:{location}");
     }
 
