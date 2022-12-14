@@ -18,7 +18,7 @@ public static class ArkInitializer
     public static Tuple<Resources.ResourceGroup, Storage.StorageAccount> CreateStorage(string groupName, string  stAccountName)
     {
         var resourceGroup = new Resources.ResourceGroup(groupName);
-        var storageAccount = new Storage.StorageAccount("sa", new()
+        var storageAccount = new Storage.StorageAccount(stAccountName, new()
         {
             ResourceGroupName = resourceGroup.Name,
             Sku = new SkuArgs
